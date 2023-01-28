@@ -2,6 +2,8 @@
 
 const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
 
+
+
 </script>
 
 <template>
@@ -17,11 +19,9 @@ const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
     :alt="name">
 
     <img
-    style="max-height: 634px;
-    max-width: 634px;"
     src="../assets/img/Pokeball.svg"
     v-else
-    class="card-img-top pt-2"
+    class="card-img-top pt-2 pokebola"
     alt="??">
 
     <div class="card-body">
@@ -50,6 +50,11 @@ const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
     background: rgb(80,13,224);
     background: radial-gradient(circle, rgba(80,13,224,0.8267682072829132) 50%, rgba(104,242,236,0.8267682072829132) 100%);
     margin-bottom: 25px;
+}
+
+.pokebola{
+    max-height: 634px;
+    max-width: 634px;
 }
 
 </style>

@@ -11,7 +11,24 @@ let searchPokemonField = ref("")
 
 let pokemonSelected = reactive(ref())
 
+let pokemonSelectedName = reactive(ref())
+
 let loading = ref(false)
+
+
+const AjeitaNome =  (pokemonName) =>{
+  let nomeMaiusculo = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1).replaceAll('-',' ')
+
+  const nomeAjeitado = nomeMaiusculo.split(" ");
+
+  for (let i = 0; i < nomeAjeitado.length; i++) {
+    nomeAjeitado[i] = nomeAjeitado[i][0].toUpperCase() + nomeAjeitado[i].substr(1);
+  }
+
+  return nomeAjeitado.join(" ")
+
+}
+
 
 onMounted(()=>{
   fetch("https://pokeapi.co/api/v2/pokemon?limit=1271&offset=0")
@@ -24,7 +41,7 @@ onMounted(()=>{
 const pokemonsFiltered = computed(()=>{
   if(pokemons.value && searchPokemonField.value){
     return pokemons.value.filter(pokemon=>
-      pokemon.name.toLowerCase().includes(searchPokemonField.value.toLowerCase())
+      AjeitaNome(pokemon.name).toLowerCase().includes(searchPokemonField.value.toLowerCase())
     )
   }
   return pokemons.value;
@@ -35,13 +52,16 @@ const selectPokemon = async (pokemon)=>{
   loading.value = true;
   await fetch(pokemon.url)
   .then(res => res.json())
-  .then(res => pokemonSelected.value = res)
+  .then(res => {
+    pokemonSelected.value = res
+    console.log(pokemonSelected.value.name)
+    pokemonSelectedName = AjeitaNome(pokemonSelected.value.name)
+  })
   .catch(err => alert(err))
   .finally(()=>{
     loading.value = false;
   })
 
-  console.log(pokemonSelected.value.sprites.other['official-artwork'].front_default)
 }
 
 </script>
@@ -54,7 +74,7 @@ const selectPokemon = async (pokemon)=>{
         <div class="col-sm-12 col-md-6">
 
           <card-pokemon-selected
-          :name="pokemonSelected?.name"
+          :name="pokemonSelectedName"
           :xp="pokemonSelected?.base_experience"
           :height="pokemonSelected?.height"
           :img="pokemonSelected?.sprites.other['official-artwork'].front_default"
@@ -65,23 +85,25 @@ const selectPokemon = async (pokemon)=>{
         </div>
 
         <div class="col-sm-12 col-md-6">
+          <div class="mb-2 card">
+                
+            <label hidden for="searchPokemonField" class="form-label">Pesquisar</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            id="searchPokemonField" 
+            placeholder="Pesquisar"
+            v-model="searchPokemonField"
+            >
+          </div>
           <div class="card card-list">
             <div class="card-body row">
 
-              <div class="mb-3">
-                <label hidden for="searchPokemonField" class="form-label">Pesquisar</label>
-                <input 
-                type="text" 
-                class="form-control" 
-                id="searchPokemonField" 
-                placeholder="Pesquisar"
-                v-model="searchPokemonField"
-                >
-              </div>
+              
               
               <ListPokemons
               v-for="(pokemon, index) in pokemonsFiltered" :key="index"
-              :pokemonName="pokemon.name"
+              :pokemonName="AjeitaNome(pokemon.name)"
               :urlBase=" (urlBasePNG + pokemon.url.split('/')[6] + '.png')"
               @click="selectPokemon(pokemon)"
               />
@@ -105,7 +127,7 @@ const selectPokemon = async (pokemon)=>{
 
 .card-list{
   overflow-y: scroll;
-  max-height: 757px;
+  max-height: calc(755px - 24px - 12px - 9px);
   overflow-x: hidden ;
 }
 
