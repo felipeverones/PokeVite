@@ -54,9 +54,8 @@ const selectPokemon = async (pokemon)=>{
   .then(res => res.json())
   .then(res => {
     pokemonSelected.value = res
-    console.log(pokemonSelected.value.name)
     pokemonSelectedName = AjeitaNome(pokemonSelected.value.name)
-  })
+  })1
   .catch(err => alert(err))
   .finally(()=>{
     loading.value = false;
