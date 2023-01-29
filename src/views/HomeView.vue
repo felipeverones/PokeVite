@@ -13,6 +13,8 @@ let pokemonSelected = reactive(ref())
 
 let pokemonSelectedName = reactive(ref())
 
+let pokemonSelectedType = reactive(ref())
+
 let loading = ref(false)
 
 
@@ -27,6 +29,22 @@ const AjeitaNome =  (pokemonName) =>{
 
   return nomeAjeitado.join(" ")
 
+}
+
+const Tipos = (pokemon) =>{
+  let tipo1 = pokemon.types[0].type.name
+  let tipos = []
+  tipos.push(tipo1)
+  if(pokemon.types.length > 1){
+  let tipo2 = pokemon.types[1].type.name
+    tipos.push(tipo2)
+  }
+
+  for (let i = 0; i < tipos.length; i++) {
+    tipos[i] = tipos[i][0].toUpperCase() + tipos[i].substr(1);
+  }
+
+  return tipos.join(" ")
 }
 
 
@@ -54,7 +72,8 @@ const selectPokemon = async (pokemon)=>{
   .then(res => res.json())
   .then(res => {
     pokemonSelected.value = res
-    pokemonSelectedName = AjeitaNome(pokemonSelected.value.name)
+    pokemonSelectedName.value = AjeitaNome(pokemonSelected.value.name)
+    pokemonSelectedType.value = Tipos(pokemonSelected.value)
   })
   .catch(err => alert(err))
   .finally(()=>{
@@ -74,7 +93,7 @@ const selectPokemon = async (pokemon)=>{
 
           <card-pokemon-selected
           :name="pokemonSelectedName"
-          :xp="pokemonSelected?.base_experience"
+          :types="pokemonSelectedType"
           :height="pokemonSelected?.height"
           :img="pokemonSelected?.sprites.other['official-artwork'].front_default"
           :loading="loading"

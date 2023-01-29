@@ -1,6 +1,6 @@
 <script setup>
 
-const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
+const pokemon = defineProps(['name', 'types', 'height', 'img', 'loading'])
 
 
 
@@ -29,8 +29,8 @@ const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
         <hr>
         <div class="row">
             <section class="col">
-                <strong>XP: </strong>
-                <span>{{ xp || '??'}}</span>
+                <strong>Type: </strong>
+                <span>{{ types || '??'}}</span>
             </section> 
             <section class="col">
                 <strong>Altura: </strong>
@@ -53,7 +53,7 @@ const pokemon = defineProps(['name', 'xp', 'height', 'img', 'loading'])
 }
 
 .pokebola{
-    max-height: 634px;
+    max-height: 643px;
     max-width: 634px;
 }
 
