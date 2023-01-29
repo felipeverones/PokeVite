@@ -33,7 +33,7 @@ const pokemon = defineProps(['name', 'types', 'height', 'img', 'loading'])
                 <span>{{ types || '??'}}</span>
             </section> 
             <section class="col">
-                <strong>Altura: </strong>
+                <strong>Height: </strong>
                 <span>{{ (height * 10 + ` cm`) || '??'}}</span>
             </section>
         </div>
