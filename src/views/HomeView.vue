@@ -110,7 +110,7 @@ const selectPokemon = async (pokemon)=>{
             type="text" 
             class="form-control" 
             id="searchPokemonField" 
-            placeholder="Pesquisar"
+            placeholder="Search"
             v-model="searchPokemonField"
             >
           </div>
