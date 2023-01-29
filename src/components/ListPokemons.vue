@@ -34,4 +34,9 @@ const pokemon = defineProps(['pokemonName', 'urlBase'])
         padding: .1rem;
     }
 
+    p{
+        font-weight: 500;
+        color: #424242;
+    }
+
 </style>
