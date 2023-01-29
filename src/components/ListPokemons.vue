@@ -7,7 +7,7 @@ const pokemon = defineProps(['pokemonName', 'urlBase'])
 
 <template>
   <div class="col-4">
-    <div class="card p-2 mb-3 cardListPokemon">
+    <div class="card p-1 mb-3 cardListPokemon">
         <p class="text-center">{{ pokemonName }}</p>
         <img :src="urlBase || pokemonName" class="card-img-top"
          alt="image not found">
@@ -37,6 +37,13 @@ const pokemon = defineProps(['pokemonName', 'urlBase'])
     p{
         font-weight: 500;
         color: #424242;
+    }
+
+    @media (max-width: 430px){
+        p{
+            font-size: 12px;
+            font-weight: 600;
+        }
     }
 
 </style>
