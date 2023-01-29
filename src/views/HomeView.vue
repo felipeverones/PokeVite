@@ -125,6 +125,25 @@ const selectPokemon = async (pokemon)=>{
   margin-bottom: 75px;
 }
 
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(69, 197, 220);
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px grey;
+
+}
+
 .card-list{
   overflow-y: scroll;
   max-height: calc(755px - 24px - 12px - 9px);

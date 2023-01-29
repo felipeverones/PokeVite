@@ -50,6 +50,24 @@ body{
   background: linear-gradient(0deg, rgba(236,104,242,1) 0%, rgba(34,13,224,1) 100%);
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(69, 197, 220);
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px grey;
+
+}
+
 footer{
   position:fixed;
   bottom: 0;
