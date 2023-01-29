@@ -55,7 +55,7 @@ const selectPokemon = async (pokemon)=>{
   .then(res => {
     pokemonSelected.value = res
     pokemonSelectedName = AjeitaNome(pokemonSelected.value.name)
-  })1
+  })
   .catch(err => alert(err))
   .finally(()=>{
     loading.value = false;
